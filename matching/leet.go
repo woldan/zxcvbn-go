@@ -1,16 +1,30 @@
 package matching
 
 import (
+	"bytes"
+	"encoding/json"
+	"github.com/woldan/zxcvbn-go/data"
 	"github.com/woldan/zxcvbn-go/entropy"
 	"github.com/woldan/zxcvbn-go/match"
 	"strings"
 )
 
+var L33T_PERMS []map[string]string
+
+func init() {
+	data, err := zxcvbn_data.Asset("data/L33tPerms.json")
+	if err != nil {
+		panic("Can't find asset")
+	}
+
+	json.NewDecoder(bytes.NewReader(data)).Decode(&L33T_PERMS)
+}
+
 func l33tMatch(password string) []match.Match {
 
-	substitutions := relevantL33tSubtable(password)
+	// substitutions := relevantL33tSubtable(password)
 
-	permutations := getAllPermutationsOfLeetSubstitutions(password, substitutions)
+	permutations := getAllSubstitutedPasswords(password)
 
 	var matches []match.Match
 
@@ -26,6 +40,18 @@ func l33tMatch(password string) []match.Match {
 	}
 
 	return matches
+}
+
+func getAllSubstitutedPasswords(password string) []string {
+	var perms []string
+
+	for _, l := range L33T_PERMS {
+		for k, v := range l {
+			perms = append(perms, strings.Replace(password, k, v, -1))
+		}
+	}
+
+	return perms
 }
 
 func getAllPermutationsOfLeetSubstitutions(password string, substitutionsMap map[string][]string) []string {
