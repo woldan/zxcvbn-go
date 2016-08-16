@@ -1,9 +1,9 @@
 package zxcvbn
 
 import (
-	"github.com/nbutton23/zxcvbn-go/matching"
-	"github.com/nbutton23/zxcvbn-go/scoring"
-	"github.com/nbutton23/zxcvbn-go/utils/math"
+	"github.com/woldan/zxcvbn-go/matching"
+	"github.com/woldan/zxcvbn-go/scoring"
+	"github.com/woldan/zxcvbn-go/utils/math"
 	"time"
 )
 

@@ -1,7 +1,7 @@
 package entropy
 
 import (
-	"github.com/nbutton23/zxcvbn-go/match"
+	"github.com/woldan/zxcvbn-go/match"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
